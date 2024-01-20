@@ -4,6 +4,13 @@ Pyxie (pronounced "pixie") is a simple CLI tool for viewing Solana program metad
 
 By default, pyxie will use the mainnet-beta cluster and Phoenix V1
 
+### Installation:
+
+```
+$ pip install pyxie-solana
+```
+
+### Usage:
 ```
 usage: pyxie [-h] [-u URL] [program_id]
 
