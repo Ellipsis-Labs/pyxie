@@ -1,62 +1,61 @@
-# pyxie
+# Pyxie
 
-Simple Python CLI tool for viewing Solana program metadata
+Pyxie (pronounced "pixie") is a simple CLI tool for viewing Solana program metadata.
 
-Usage: pyxie [OPTIONS] COMMAND [ARGS]...
-
-Example:
+By default, pyxie will use the mainnet-beta cluster and Phoenix V1
 
 ```
-# By default, pyxie will use the mainnet-beta cluster and Phoenix V1
-$ pyxie
+usage: pyxie [-h] [-u URL] [program_id]
 
-+------------------------------------+----------------------------------------------+
-|              Property              |                    Value                     |
-+------------------------------------+----------------------------------------------+
-|             Program ID             | PhoeNiXZ8ByJGLkxNfZRnkUfjvmuYqLR89jjFHGqdXY  |
-|        Program Data address        | 2myyNegEA6pjAHmmEsJC6JdYhW51gwxQW7ZCTWvwaKTk |
-|            SOL Balance             |                   ◎34.8012                   |
-|         Last deployed slot         |                  231433470                   |
-|         Last deployed time         |           2023-11-21 16:12:23 UTC            |
-|         Upgrade Authority          | 8mv7G3fJq5a5ej7E14vgcSGeQKH79emjU9fVfuhyitEq |
-|       Upgradeable by Keypair       |                    No 👌                     |
-|     Program Data account size      |                   4.77 MB                    |
-|        Actual Program Size         |                   1.28 MB                    |
-| Total number of eBPF instructions  |                    148777                    |
-| Program entrypoint virtual address |                 0x10010a988                  |
-+------------------------------------+----------------------------------------------+
+positional arguments:
+  program_id         Program ID of requested Solana Program, by default Phoenix V1 is requested
+
+options:
+  -h, --help         show this help message and exit
+  -u URL, --url URL  RPC Endpoint
+```
+
+### Example:
+
+```
+$ pyxie TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
++------------------------------------+---------------------------------------------+
+|              Property              |                    Value                    |
++------------------------------------+---------------------------------------------+
+|             Program ID             | TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA |
+|            SOL Balance             |                   ◎0.9341                   |
+|     Program Data account size      |                  130.94 KB                  |
+|        Actual Program Size         |                  130.38 KB                  |
+| Total number of eBPF instructions  |                    14124                    |
+| Program entrypoint virtual address |                 0x10000f9d8                 |
++------------------------------------+---------------------------------------------+
 
 Virtual Memory Layout of Program Data:
 +--------------+---------------------------+--------------+
 |   Section    |   Virtual Address Range   | Size (Bytes) |
 +--------------+---------------------------+--------------+
-|    .text     | 0x100000000 - 0x100122948 |   1190216    |
-|   .rodata    | 0x100122950 - 0x10012636f |    14879     |
-| .data.rel.ro | 0x100126370 - 0x10012a728 |    17336     |
-|   .dynamic   | 0x10012a728 - 0x10012a7d8 |     176      |
-|   .dynsym    | 0x10012a7d8 - 0x10012a970 |     408      |
-|   .dynstr    | 0x10012a970 - 0x10012aa6c |     252      |
-|   .rel.dyn   | 0x10012aa70 - 0x100148030 |    120256    |
-|  .shstrtab   | 0x100148030 - 0x100148078 |      72      |
+|    .text     | 0x100000000 - 0x10001b960 |    112992    |
+|   .rodata    | 0x10001b960 - 0x10001d227 |     6343     |
+| .data.rel.ro | 0x10001d228 - 0x10001ddf8 |     3024     |
+|   .dynamic   | 0x10001ddf8 - 0x10001dea8 |     176      |
+|   .dynsym    | 0x10001dea8 - 0x10001dfb0 |     264      |
+|   .dynstr    | 0x10001dfb0 - 0x10001e031 |     129      |
+|   .rel.dyn   | 0x10001e038 - 0x100020818 |    10208     |
+|  .shstrtab   | 0x100020818 - 0x100020860 |      72      |
 +--------------+---------------------------+--------------+
 
 System Call Frequencies:
-+------------------------------+-----------+
-|         System Call          | Frequency |
-+------------------------------+-----------+
-|            abort             |    1770   |
-|           sol_log_           |    303    |
-|    sol_log_compute_units_    |     14    |
-|         custom_panic         |     1     |
-|         sol_memcmp_          |     1     |
-|         sol_memset_          |     2     |
-| sol_try_find_program_address |     1     |
-|        sol_keccak256         |     1     |
-|    sol_invoke_signed_rust    |     1     |
-|     sol_set_return_data      |     1     |
-|     sol_get_clock_sysvar     |     1     |
-|     sol_get_rent_sysvar      |     1     |
-|         sol_memcpy_          |     1     |
-|         sol_memmove_         |     1     |
-+------------------------------+-----------+
++---------------------+-----------+
+|     System Call     | Frequency |
++---------------------+-----------+
+|        abort        |    113    |
+|     sol_memcmp_     |     11    |
+|       sol_log_      |     29    |
+|     custom_panic    |     1     |
+|     sol_memset_     |     1     |
+| sol_set_return_data |     1     |
+| sol_get_rent_sysvar |     1     |
+|     sol_memcpy_     |     1     |
+|     sol_memmove_    |     1     |
++---------------------+-----------+
 ```

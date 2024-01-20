@@ -78,7 +78,8 @@ def main():
     program_meta = PrettyTable()
     program_meta.field_names = ["Property", "Value"]
     program_meta.add_row(["Program ID", program_key])
-    program_meta.add_row(["Program Data address", key])
+    if upgradeable:
+        program_meta.add_row(["Program Data address", key])
     program_meta.add_row(["SOL Balance", f"◎{round(account.value.lamports / 1e9, 4)}"])
 
     if upgradeable:
