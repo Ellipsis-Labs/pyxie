@@ -1,2 +1,2 @@
 # pyxie
-Simply Python CLI tool for viewing Solana program metadata
+Simple Python CLI tool for viewing Solana program metadata
